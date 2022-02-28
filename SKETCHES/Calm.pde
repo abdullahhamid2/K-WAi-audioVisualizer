@@ -31,7 +31,8 @@ void setup() {
 }
  
 void draw () {
-  fill(0,50);  
+  
+  fill(#666666,50);  
   //fill(256,50);    //LOOK INTO fill() Syntax. 
   noStroke();  //Disables drawing the stroke (outline).
   rect(0, 0, width, height);
