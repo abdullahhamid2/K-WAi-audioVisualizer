@@ -59,20 +59,22 @@ void draw() {
 void spirals() {
   background(0);
   translate(width/2, height/2);
-  
+  hint(ENABLE_STROKE_PURE);
   //for a wave function, -1 - 0 -  1
   float wave = sin(radians(frameCount));
   float w =  wave*map(mouseX, 0, height, 2500, 0);
   for(int i = 0; i < 500; i++){
     rotate(rAngle);
-    stroke(rStroke);
-    //line(850, i-w/2, -850, i++);
+    //stroke(rStroke);   //USE THIS FOR RANDOM
+    stroke(#FA7D00); // ORANGE
     line(850, i-w/2, -850, i++);
     strokeWeight(map(wave, -1, 1, 0.5, rStrokeSize));
-    stroke(rStroke);
+    //stroke(rStroke);  //USE THIS FOR RANDOM
+    stroke(#0500B4); //BLUEISH
     strokeWeight(map(wave, -1, 1, 0.5, rStrokeSize));
     line(-850, -i+w, 550, i++);
-    stroke(rStroke, rStroke, 0);
+    //stroke(rStroke, rStroke, 0);
+    stroke(#D90EE8);//PURPLE
     line(-850, i-w, 850, i++);
   }
   
