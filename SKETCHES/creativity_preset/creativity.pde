@@ -72,8 +72,8 @@ void draw() {
   float w =  wave*map(rWaveMap, 0, height, 500, 0);
   for (int i = 0; i < fft.specSize() - 1; i++) {
     //rotate(rAngle);
-    //rotate(0.8); //0.1, 0.9 look good too.
-    rotate(2.1);
+    rotate(0.1); //0.8, 0.9, look good too.
+    //rotate(2.1);
     stroke(#F7FAF8); //WHITE
     line(850, i-w/2, -850, i++);
     strokeWeight(map(wave, -1, 1, 0.5, rStrokeSize));
