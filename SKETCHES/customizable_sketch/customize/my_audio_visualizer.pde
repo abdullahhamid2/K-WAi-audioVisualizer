@@ -7,10 +7,12 @@ import ddf.minim.ugens.*;
 import ddf.minim.analysis.FFT;
 import controlP5.*;
 import processing.sound.*;
+
 Visualizer visualizer;
 ControlPanel controlPanel;
 ControlP5 cp5;
 Minim minim;
+
 int controlPanelWidth;
 int windowHeight;
 int windowWidth;
@@ -36,10 +38,8 @@ void setup() {
   //FOR MIC
   //input = minim.getLineIn(Minim.STEREO, 512);
   
-  
   fft = new FFT(input.bufferSize(), input.sampleRate());
   size(displayWidth, displayHeight);
-  
 
   visualizer = new Visualizer(windowHeight, windowWidth, visualizerWidth);
   controlPanel = new ControlPanel(visualizer, windowHeight, windowWidth, controlPanelWidth, cp5);
@@ -153,11 +153,6 @@ public class Visualizer{
     }
   }
   
-  
-  
-  
-  
-  
   private void function1(){
     
     //TO-DO
@@ -180,10 +175,20 @@ public class Visualizer{
     }
   }
   
-  
-    private void function2(){
-    
-    //TO-DO
+
+private void function2(){
+float a = 0.0;
+float inc = TWO_PI/25.0;
+float prev_x = 0, prev_y = 50, x, y;
+translate(height/2,width/2);
+for(int i=0; i<100; i=i+4) {
+  x = i;
+  y = 50 + sin(a) * 40.0;
+  line(prev_x, prev_y, x, y);
+  prev_x = x;
+  prev_y = y;
+  a = a + inc;
+}    
   }
   
     private void function3(){
@@ -195,135 +200,6 @@ public class Visualizer{
     
     //TO-DO
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  //---------------------------------------------------------------------------------------------
-  
-  
-  //private void pulse() {
-  //  // Config background
-  //  fill(0, 0, 0, 10);
-  //  rect(0, 0, visualizerWidth, height);
-  //  // Declarations & Instantiations
-  //  adjustedAmplitudeMagnitude = amplitudeMagnitude * 10000; // Max 10000
-  //  adjustedFrequencyMagnitude = frequencyMagnitude * 100; // Max 50
-
-  //  // Visualization
-  //  for (int i = 0; i < 3; i++) {
-  //    fill(random(0, 255), random(0, 255), random(0, 255));
-      
-  //    amplitude = (input.mix.get(1) * adjustedAmplitudeMagnitude);
-  //    frequency = (fft.getBand(1) * adjustedFrequencyMagnitude);
-
-  //    ellipse(random(i, width), (height / 2) - amplitude, frequency, frequency);
-  //  }
-    
-  //}
-  
-  //---------------------------------------------------------------------------------------------
-  
-  
-  //private void reverb() {
-  //  // Configurations
-  //  fill(0, 0, 0, 10);
-  //  rect(0, 0, visualizerWidth, height);
-
-  //  // Declarations & Instantiations
-  //  int margin = 80;
-  //  int startingDivisor = 5;
-
-  //  adjustedAmplitudeMagnitude = amplitudeMagnitude * 800; // Max 800
-  //  adjustedFrequencyMagnitude = frequencyMagnitude * 800; // Max 800
-
-  //  // Visualization
-  //  for(int i = 0; i < fft.specSize(); i++){
-  //    fill(random(0, 255), random(0, 255), random(0, 255));
-  //    ellipse(margin * i, height - fft.getBand(i) * adjustedFrequencyMagnitude - height/startingDivisor,
-  //      input.left.get(i) * adjustedAmplitudeMagnitude, input.right.get(i) * adjustedAmplitudeMagnitude);
-  //  }
-  //}
-  
-  
-  //---------------------------------------------------------------------------------------------
-  //private void sunrise() {
-  //  // Configurations
-  //  frameRate(50);
-  //  fill(0, 0, 0);
-  //  rect(0, 0, visualizerWidth, height);
-
-  //  // Declarations & Instantiations
-  //  int barCount = 100;
-  //  int margin = 20;
-
-  //  adjustedAmplitudeMagnitude = amplitudeMagnitude * 4000; // Max 4000
-  //  adjustedFrequencyMagnitude = frequencyMagnitude * 200; // Max 200
-
-  //  // Visualization
-  //  for (int i = 0; i < 100; i++) {
-  //    // x, y, width, height
-  //    fill(255, 127.5 + i, 255 - (2.5 * i), random(150, 200));
-  //    int test = (int) (fft.getBand(i) * 100);
-  //    rect(margin * i, 0, 10, abs(input.mix.get(i) * adjustedAmplitudeMagnitude));
-  //  }
-  //}
-  //---------------------------------------------------------------------------------------------
-  
-  
-  //private void radial() {
-  //  fill(0, 0, 0, 10); // 5?
-  //  rect(0, 0, visualizerWidth, height);
-
-  //  // Declarations & Instantiations
-  //  float circleCount = 80;
-  //  float centerPosX = visualizerWidth/2;
-  //  float centerPosY = height/2;
-
-  //  float diameter =  visualizerWidth * .04;
-  //  float radius  = diameter/2;
-  //  float circ =  PI * diameter;
-  //  float smallDiameter = (circ / circleCount);
-
-  //  float angle, x, y;
-
-  //  adjustedAmplitudeMagnitude = amplitudeMagnitude * 1000; // Max 5000
-  //  adjustedFrequencyMagnitude = frequencyMagnitude * 25; // Max 50
-  //  amplitude = (input.mix.get(1) * adjustedAmplitudeMagnitude);
-  //  frequency = (fft.getBand(1) * adjustedFrequencyMagnitude);
-
-  //  fill(color1, color2, color3);
-
-  //  // Fill Change Over Time
-  //  if(millis() - time >= wait) {
-  //    color1 += 10;
-  //    color2 -= 5;
-
-  //    // Resets
-  //    if(color1 >= 255) { color1 = 0; }
-  //    if(color2 <= 0) { color2 = 255; }
-  //    if(color3 <= 0) { color3 = 255; }
-
-  //    time = millis(); // Updates time
-  //  }
-
-  //  // Visualization
-  //  for(int i = 1; i <= circleCount; ++i) {
-  //    angle = i * TWO_PI / circleCount;
-  //    x = centerPosX + cos(angle) * radius * amplitude;
-  //    y = centerPosY + sin(angle) * radius * amplitude;
-
-  //    ellipse(x, y, smallDiameter * frequency, smallDiameter * frequency);
-  //  }
-  //}
-  
-  
-  //---------------------------------------------------------------------------------------------
   
   
   public void update(float amplitudeMagnitude, float frequencyMagnitude, float visualizationIndex) {

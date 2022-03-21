@@ -24,14 +24,11 @@ public class ControlPanel {
     elementsPosX = controlPanelPosX + 30;
     buttonWidth = (controlPanelWidth - 75) / 2; // Half of element width - margin(15)
 
-    /* Sliders: reference denoted by spaces to hide label and show value */
-
-    //cp5.setControlFont(createFont("Arial", 10));
     cp5.setFont(new ControlFont(createFont("Arial", 10),10));
 
     // AmplitudeMagnitude
     cp5.addSlider("amplitude")
-    .setLabel("")
+      .setLabel("")
       .setColorForeground(highlightColor)
       .setColorActive(highlightColor)
       .setColorBackground(dimColor)
