@@ -63,10 +63,6 @@ void setup() {
     }
   });
 }
-
-/**
- * Visualization
- */
 void draw() {
   if(go) {
     visualizer.draw();
@@ -76,18 +72,10 @@ void draw() {
   }
 
 }
-
-/**
- * Mouse input
- */
 void mouseReleased() {
 
   controlPanel.mouseEvent();
 }
-
-/**
- * Stops program flow
- */
 void stop() {
   super.stop();
 }
@@ -121,9 +109,6 @@ public class Visualizer{
     time = millis(); // Current time
   }
 
-  /**
-   * Visualization
-   */
   public void draw() {
     fft.forward(input.mix);
     noStroke();
@@ -131,25 +116,21 @@ public class Visualizer{
     switch(visualizationIndex) {
       case 0:
         fill(0, 0, 0);
-        //reverb();
         function1();
         break;
       case 1:
      fill(0, 0, 0);
-        //pulse();
         function2();
         break;
       case 2:
-        //sunrise();
         function3();
         break;
       case 3:
       fill(0, 0, 0);
-        //radial();
         function4();
         break;
       default:
-        //reverb();
+        function1();
     }
   }
   
