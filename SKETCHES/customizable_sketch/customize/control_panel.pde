@@ -9,8 +9,11 @@ public class ControlPanel {
   int elementsPosX;
   int buttonWidth;
 
-  color dimColor = color(35,35,35);
-  color highlightColor = color(0,151,244);
+  //color dimColor = color(35,35,35);
+  //color highlightColor = color(0,151,244);
+  
+  color dimColor = color(#000000);
+  color highlightColor = color(0,150,250);
 
   public ControlPanel(Visualizer visualizer, int windowHeight, int windowWidth, int controlPanelWidth, ControlP5 cp5) {
     this.visualizer = visualizer;
@@ -49,12 +52,47 @@ public class ControlPanel {
       .setRange(0, 1)
       .setWidth(controlPanelWidth - 60) // 2x margin
       .setValue(0.50); // Default
+      
+          //red color
+    cp5.addSlider("redcolor")
+      .setLabel("")
+      .setColorActive(highlightColor)
+      .setColorForeground(highlightColor)
+      .setColorBackground(dimColor)
+      .setHeight(10)
+      .setPosition(controlPanelPosX + 30, 370)
+      .setRange(0, 255)
+      .setWidth(controlPanelWidth - 500) // 2x margin
+      .setValue(100); // Default
+      
+     cp5.addSlider("greencolor")
+      .setLabel("")
+      .setColorActive(highlightColor)
+      .setColorForeground(highlightColor)
+      .setColorBackground(dimColor)
+      .setHeight(10)
+      .setPosition(controlPanelPosX + 240, 370)
+      .setRange(0, 255)
+      .setWidth(controlPanelWidth - 500) // 2x margin
+      .setValue(100); // Default
+      
+      
+    cp5.addSlider("bluecolor")
+      .setLabel("")
+      .setColorActive(highlightColor)
+      .setColorForeground(highlightColor)
+      .setColorBackground(dimColor)
+      .setHeight(10)
+      .setPosition(controlPanelPosX + 450, 370)
+      .setRange(0, 255)
+      .setWidth(controlPanelWidth - 500) // 2x margin
+      .setValue(100); // Default
 
     // Visualization
     RadioButton radioButton = cp5.addRadioButton("radioButton");
     radioButton
         .setColorBackground(dimColor)
-        .setPosition(elementsPosX, 350)
+        .setPosition(elementsPosX, 450)
         .setColorForeground(#2B2B2B)
         .setColorActive(highlightColor)
         .setSize(25, 25)
@@ -101,7 +139,8 @@ public class ControlPanel {
   public void draw() {
 
     // Background
-    fill(49, 49, 49);
+    //fill(49, 49, 49);
+    fill(60,60,60);
     rect(controlPanelPosX, 0, controlPanelWidth, windowHeight);
 
     /* Text (margin: 60, 30) */
@@ -127,19 +166,37 @@ public class ControlPanel {
     textSize(12);
     text("Magnify the frequency of the audio", elementsPosX, 235);
 
-    textSize(16);
-    text("Visualization Selector", elementsPosX, 310);
-    textSize(12);
-    text("Visualize music", elementsPosX, 330);
 
     textSize(16);
-    text("Instructions", elementsPosX, 530);
+    text("Color Selector", elementsPosX, 315);
     textSize(12);
-    text("- INSERT INSTRUCTION 1 HERE", elementsPosX, 550);
-    text("- INSERT INSTRUCTION 2 HERE", elementsPosX, 570);
-    text("- INSERT INSTRUCTION 3 HERE", elementsPosX, 590);
-    text("- INSERT INSTRUCTION 4 HERE", elementsPosX, 610);
-    text("- INSERT INSTRUCTION 5 HERE", elementsPosX, 630);
+    text("Change the color of the visualizations!", elementsPosX, 335);
+    
+    textSize(14);
+    fill(255,0,0);
+    text("RED",elementsPosX+50,365);
+    
+    fill(0,255,0);
+    text("GREEN", elementsPosX+250,365);
+    
+    fill(0,0,255);
+    text("BLUE", elementsPosX+470, 365);
+    
+    
+    fill(#FFFFFF);
+    textSize(16);
+    text("Visualization Selector", elementsPosX, 410);
+    textSize(12);
+    text("Visualize music", elementsPosX, 435);
+
+    textSize(16);
+    text("Instructions", elementsPosX, 610);
+    textSize(12);
+    text("- INSERT INSTRUCTION 1 HERE", elementsPosX, 630);
+    text("- INSERT INSTRUCTION 2 HERE", elementsPosX, 650);
+    text("- INSERT INSTRUCTION 3 HERE", elementsPosX, 670);
+    text("- INSERT INSTRUCTION 4 HERE", elementsPosX, 690);
+    text("- INSERT INSTRUCTION 5 HERE", elementsPosX, 710);
 
   }
 
@@ -148,6 +205,9 @@ public class ControlPanel {
     float amplitudeMagnitude = cp5.get(Slider.class, "amplitude").getValue();
     float frequencyMagnitude = cp5.get(Slider.class, "frequency").getValue();
     float visualizationIndex = cp5.get(RadioButton.class, "radioButton").getValue();
-    visualizer.update(amplitudeMagnitude, frequencyMagnitude, visualizationIndex);
+    float redcolor = cp5.get(Slider.class, "redcolor").getValue();
+    float greencolor = cp5.get(Slider.class, "greencolor").getValue();
+    float bluecolor = cp5.get(Slider.class, "bluecolor").getValue();
+    visualizer.update(amplitudeMagnitude, frequencyMagnitude, visualizationIndex, redcolor, greencolor, bluecolor);
   }
 }

@@ -21,9 +21,8 @@ FFT fft;
 //inputInput input;
 AudioPlayer input;
 boolean go = true;
-float var1;
-float var2;
-
+int n = 0;
+//var spectrum = fft.analyze(); // This is what gives us the shape
 void setup() {
   cp5 = new ControlP5(this);
   System.out.println("Reset!");
@@ -39,7 +38,7 @@ void setup() {
   //input = minim.getLineIn(Minim.STEREO, 512);
   
   fft = new FFT(input.bufferSize(), input.sampleRate());
-  size(displayWidth, displayHeight);
+  size(displayWidth, displayHeight, P3D);
 
   visualizer = new Visualizer(windowHeight, windowWidth, visualizerWidth);
   controlPanel = new ControlPanel(visualizer, windowHeight, windowWidth, controlPanelWidth, cp5);
@@ -85,6 +84,9 @@ public class Visualizer{
   float frequencyMagnitude = 0.5; // Default
   float adjustedAmplitudeMagnitude;
   float adjustedFrequencyMagnitude;
+  float redcolor;
+  float bluecolor;
+  float greencolor;
   float amplitude;
   float frequency;
 
@@ -115,21 +117,26 @@ public class Visualizer{
 
     switch(visualizationIndex) {
       case 0:
-        fill(0, 0, 0);
+        //fill(0, 0, 0);
+        background(0);
         function1();
         break;
       case 1:
-     fill(0, 0, 0);
+     //fill(0, 0, 0);
+     background(0);
         function2();
         break;
       case 2:
+      background(0);
         function3();
         break;
       case 3:
-      fill(0, 0, 0);
+      //fill(0, 0, 0);
+      background(0);
         function4();
         break;
       default:
+      background(0);
         function1();
     }
   }
@@ -158,23 +165,29 @@ public class Visualizer{
   
 
 private void function2(){
-float a = 0.0;
-float inc = TWO_PI/25.0;
-float prev_x = 0, prev_y = 50, x, y;
-translate(height/2,width/2);
-for(int i=0; i<100; i=i+4) {
-  x = i;
-  y = 50 + sin(a) * 40.0;
-  line(prev_x, prev_y, x, y);
-  prev_x = x;
-  prev_y = y;
-  a = a + inc;
-}    
+    fill(0, 0, 0, 10);
+    rect(0, 0, visualizerWidth, height);
+
+    // Declarations & Instantiations
+    int margin = 80;
+    int startingDivisor = 5;
+
+    adjustedAmplitudeMagnitude = amplitudeMagnitude * 800; // Max 800
+    adjustedFrequencyMagnitude = frequencyMagnitude * 800; // Max 800
+
+    // Visualization
+    for(int i = 0; i < fft.specSize(); i++){
+      fill(random(0, 255), random(0, 255), random(0, 255));
+      circle(margin * i, height - fft.getBand(i) * adjustedFrequencyMagnitude - height/startingDivisor,
+        (input.left.get(i) + input.right.get(i)) * adjustedAmplitudeMagnitude);
+      rect(margin+50 * i,  height-fft.getBand(i) * adjustedFrequencyMagnitude - height/startingDivisor, input.left.get(i) * adjustedAmplitudeMagnitude, input.right.get(i) * adjustedAmplitudeMagnitude);
+    }
   }
   
     private void function3(){
-    
     //TO-DO
+    fill(redcolor, greencolor, bluecolor);
+    ellipse(1000, 1000,100,100);
   }
   
     private void function4(){
@@ -183,9 +196,12 @@ for(int i=0; i<100; i=i+4) {
   }
   
   
-  public void update(float amplitudeMagnitude, float frequencyMagnitude, float visualizationIndex) {
+  public void update(float amplitudeMagnitude, float frequencyMagnitude, float visualizationIndex, float redcolor, float greencolor, float bluecolor) {
     this.amplitudeMagnitude = amplitudeMagnitude;
     this.frequencyMagnitude = frequencyMagnitude;
     this.visualizationIndex = (int) visualizationIndex;
+    this.redcolor = redcolor;
+    this.greencolor = greencolor;
+    this.bluecolor = bluecolor;
   }
 }
