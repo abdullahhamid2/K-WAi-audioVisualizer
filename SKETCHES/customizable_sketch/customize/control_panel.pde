@@ -99,10 +99,10 @@ public class ControlPanel {
         .setItemsPerRow(1)
         .setSpacingRow(10)
         .setLabelPadding(20, 20)
-        .addItem("Function # 1", 0)
-        .addItem("Function # 2", 1)
-        .addItem("Function # 3", 2)
-        .addItem("Function # 4", 3)
+        .addItem("Welcome", 0)
+        .addItem("Function # 1", 1)
+        .addItem("Function # 2", 2)
+        .addItem("Function # 3", 3)
         .activate(0);
 
     // Buttons
