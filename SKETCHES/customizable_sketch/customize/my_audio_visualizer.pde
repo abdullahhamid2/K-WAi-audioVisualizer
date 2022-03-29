@@ -176,8 +176,8 @@ public class Visualizer{
   
   private void function1(){
   background(0);
-  myFont1 = createFont("LCALLIG", 32);
-  myFont2 = createFont("lucida", 32);
+  myFont1 = createFont("Lucida Calligraphy Italic", 32);
+  myFont2 = createFont("Segoe Print", 32);
   textFont(myFont1,35);
   fill(255);
   textAlign(CENTER);

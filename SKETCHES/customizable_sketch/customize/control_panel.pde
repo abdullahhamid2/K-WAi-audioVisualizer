@@ -104,7 +104,20 @@ public class ControlPanel {
         .addItem("Function # 2", 2)
         .addItem("Function # 3", 3)
         .activate(0);
-
+  
+    DropdownList droplist = cp5.addDropdownList("Music Changer");
+    droplist
+        .setColorBackground(dimColor)
+        .setPosition(elementsPosX+200, 460)
+        .setColorForeground(#2B2B2B)
+        //.setSize(120,25)
+        .setColorActive(highlightColor)
+        .setOpen(false)
+        .addItem("Choice # 1", 1)
+        .addItem("Choice # 2", 2)
+        .addItem("Choice # 3", 3)
+        .addItem("Choice # 4", 4)
+        .addItem("Choice # 5", 5);
     // Buttons
     Button pause = cp5.addButton("pause");
     pause
@@ -188,6 +201,11 @@ public class ControlPanel {
     text("Visualization Selector", elementsPosX, 410);
     textSize(12);
     text("Visualize music", elementsPosX, 435);
+    
+    textSize(16);
+    text("Music Selector",elementsPosX + 200, 410);
+    textSize(12);
+    text("Pick the music of your choice", elementsPosX + 200, 435);
 
     textSize(16);
     text("Instructions", elementsPosX, 610);
