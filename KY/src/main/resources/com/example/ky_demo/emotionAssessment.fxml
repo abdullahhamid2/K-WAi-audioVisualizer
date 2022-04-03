@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="901.0" style="-fx-background-color: rgb(5,5,15,1); -fx-background-image: KY_image2.png;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ky_demo.HelloController">
+   <children>
+      <AnchorPane layoutX="271.0" layoutY="107.0" prefHeight="338.0" prefWidth="377.0" style="-fx-background-color: rgb(25,25,50,1);">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="89.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@loadingBar.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="87.0" layoutX="145.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon.PNG" />
+               </image>
+            </ImageView>
+            <Label layoutX="139.0" layoutY="137.0" prefHeight="65.0" prefWidth="110.0" text="how are you feeling?" textAlignment="CENTER" textFill="#fdfdfd">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="b1" layoutX="73.0" layoutY="228.0" mnemonicParsing="false" onAction="#one" style="-fx-background-color: rgb(90,90,137,1);" text="1" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b2" layoutX="100.0" layoutY="228.0" mnemonicParsing="false" onAction="#two" style="-fx-background-color: rgb(90,90,137,1);" text="2" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b3" layoutX="128.0" layoutY="228.0" mnemonicParsing="false" onAction="#three" style="-fx-background-color: rgb(90,90,137,1);" text="3" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b4" layoutX="154.0" layoutY="228.0" mnemonicParsing="false" onAction="#four" style="-fx-background-color: rgb(90,90,137,1);" text="4" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b5" layoutX="182.0" layoutY="228.0" mnemonicParsing="false" onAction="#five" style="-fx-background-color: rgb(90,90,137,1);" text="5" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b6" layoutX="209.0" layoutY="228.0" mnemonicParsing="false" onAction="#six" style="-fx-background-color: rgb(90,90,137,1);" text="6" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b7" layoutX="236.0" layoutY="228.0" mnemonicParsing="false" onAction="#seven" style="-fx-background-color: rgb(90,90,137,1);" text="7" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b8" layoutX="262.0" layoutY="228.0" mnemonicParsing="false" onAction="#eight" style="-fx-background-color: rgb(90,90,137,1);" text="8" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="b9" layoutX="290.0" layoutY="228.0" mnemonicParsing="false" onAction="#nine" style="-fx-background-color: rgb(90,90,137,1);" text="9" textFill="#838395">
+               <font>
+                  <Font name="Calibri Bold" size="8.0" />
+               </font>
+            </Button>
+            <Label layoutX="146.0" layoutY="86.0" prefHeight="65.0" prefWidth="87.0" text="emotion assessment" textAlignment="CENTER" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="10.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
