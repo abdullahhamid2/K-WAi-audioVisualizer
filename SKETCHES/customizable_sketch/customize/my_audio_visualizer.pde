@@ -7,8 +7,16 @@ import ddf.minim.ugens.*;
 import ddf.minim.analysis.FFT;
 import controlP5.*;
 import processing.sound.*;
+
+
+
+PImage img;
 Visualizer visualizer;
 ControlPanel controlPanel;
+
+boolean colorchange = true;
+func3 func3;
+
 ControlP5 cp5;
 Minim minim;
 //GLOBAL VARIABLES, I KNOW, IT'S MESSY :P
@@ -16,23 +24,30 @@ int controlPanelWidth;
 int windowHeight;
 int windowWidth;
 int visualizerWidth;
+int numFrames=100;
 FFT fft;
 //inputInput input;
 AudioPlayer input;
 boolean fade = true;
 boolean go = true;
+int ranges = 0;
 int n = 0;
 float incr1; 
 float incr2;
 float limit;
 float h;
 PFont myFont1;
-int bands = 256;
+float redcolor;
+float bluecolor;
+float greencolor;
 PFont myFont2;
-Particle[] particles;
-//var spectrum = fft.analyze(); // This is what gives us the shape
-void setup() {
-  size(712,256);
+//Particle[] particles;
+int bands = 256;
+
+PathFinder[] paths;
+
+public void setup() {
+  fullScreen(P3D);
   background(25);
   cp5 = new ControlP5(this);
   System.out.println("Reset!");
@@ -48,20 +63,25 @@ void setup() {
   smooth();
   incr2 = TWO_PI/100 ;
   h = random(360);
-
-  //FOR MIC
-  //input = minim.getLineIn(Minim.STEREO, 512); 
   fft = new FFT(input.bufferSize(), input.sampleRate());
   fft.linAverages(bands);
-  particles = new Particle[fft.specSize()];
-  for (int i = 0; i < fft.specSize(); i++) {
-    particles[i] = new Particle(i);
-  }
+  
+  
+  
+  
+  
+  //particles = new Particle[fft.specSize()];
+  //for (int i = 0; i < fft.specSize(); i++) {
+  //  particles[i] = new Particle(i);
+  //}
   size(displayWidth, displayHeight, P3D);
-
+  img = loadImage("kwai_logo.jpg");
   visualizer = new Visualizer(windowHeight, windowWidth, visualizerWidth);
   controlPanel = new ControlPanel(visualizer, windowHeight, windowWidth, controlPanelWidth, cp5);
-  
+  func3 = new func3();
+    
+  paths = new PathFinder[1];
+  paths[0] = new PathFinder();
   // Listens for ControlP5 events
   cp5.addCallback(new CallbackListener() {
     public void controlEvent(CallbackEvent event) {
@@ -85,7 +105,7 @@ void setup() {
     }
   });
 }
-void draw() {
+public void draw() {
   if(go) {
     visualizer.draw();
     controlPanel.draw();
@@ -94,6 +114,7 @@ void draw() {
   }
 
 }
+
 void mouseReleased() {
 
   controlPanel.mouseEvent();
@@ -107,9 +128,6 @@ public class Visualizer{
   float frequencyMagnitude = 0.5; // Default
   float adjustedAmplitudeMagnitude;
   float adjustedFrequencyMagnitude;
-  float redcolor;
-  float bluecolor;
-  float greencolor;
   float amplitude;
   float frequency;
 
@@ -136,7 +154,8 @@ public class Visualizer{
 
   public void draw() {
     fft.forward(input.mix);
-    noStroke();
+    //noStroke();
+    img = loadImage("kwai_logo.jpg");
   //  pushStyle();
   //  colorMode(RGB, 360);   //REMOVE THIS OR NAH?
   //  if(fade) {
@@ -156,12 +175,17 @@ public class Visualizer{
         break;
       case 1:
      //fill(0, 0, 0);
-     background(0);
+        //background(0);
+        background(36);
+        ellipseMode(CENTER);
+        fill(255, 40);
+        noStroke();
+        smooth();
         function2();
         break;
       case 2:
       background(0);
-        function3();
+        func3.draw();
         break;
       case 3:
       //fill(0, 0, 0);
@@ -175,7 +199,7 @@ public class Visualizer{
   }
   
   private void function1(){
-  background(0);
+  background(color(5,10,25));
   myFont1 = createFont("Lucida Calligraphy Italic", 32);
   myFont2 = createFont("Segoe Print", 32);
   textFont(myFont1,35);
@@ -239,6 +263,7 @@ public class Visualizer{
   //-----------------------------
   //background(20);
   //colorMode(RGB, 255, redcolor, greencolor, bluecolor);
+  image(img, (displayWidth-controlPanelWidth)/3,0);
   h += .1;
   h = h % 360;
   limit =  map(mouseX, 0, width, PI/12, PI/7);
@@ -273,30 +298,58 @@ void arm(float len, float rds) {
   }
 }
 
-private void function2(){
-    fill(0, 0, 0, 10);
-    rect(0, 0, visualizerWidth, height);
+public void function2(){
+    //rect(0, 0, visualizerWidth, height);
 
     // Declarations & Instantiations
-    int margin = 80;
-    int startingDivisor = 5;
+    float circleCount = 80;
+    float centerPosX = visualizerWidth/2;
+    float centerPosY = height/2;
 
-    adjustedAmplitudeMagnitude = amplitudeMagnitude * 800; // Max 800
-    adjustedFrequencyMagnitude = frequencyMagnitude * 800; // Max 800
+    float diameter =  visualizerWidth * .04;
+    float radius  = diameter/2;
+    float circ =  PI * diameter;
+    float smallDiameter = (circ / circleCount);
+
+    float angle, x, y;
+
+    adjustedAmplitudeMagnitude = amplitudeMagnitude * 1000; // Max 5000
+    adjustedFrequencyMagnitude = frequencyMagnitude * 25; // Max 50
+    amplitude = (input.mix.get(1) * adjustedAmplitudeMagnitude);
+    frequency = (fft.getBand(1) * adjustedFrequencyMagnitude);
+    
+    
+    if(colorchange){
+         color1 = int(redcolor);
+         color2 = int(greencolor);
+         color3 = int(bluecolor);
+         colorchange = false;
+    }
+    
+
+    fill(color1, color2, color3);
+
+    // Fill Change Over Time
+    if(millis() - time >= wait) {
+      color1 += 10;
+      color2 -= 5;
+
+      // Resets
+      if(color1 >= 255) { color1 = 0; }
+      if(color2 <= 0) { color2 = 255; }
+      if(color3 <= 0) { color3 = 255; }
+
+      time = millis(); // Updates time
+    }
 
     // Visualization
-    for(int i = 0; i < fft.specSize(); i++){
-      fill(redcolor, bluecolor, greencolor);
-      ellipse(margin * i, height - fft.getBand(i) * adjustedFrequencyMagnitude - height/startingDivisor,
-        input.left.get(i) * adjustedAmplitudeMagnitude, input.right.get(i) * adjustedAmplitudeMagnitude);
+    for(int i = 1; i <= circleCount; ++i) {
+      angle = i * TWO_PI / circleCount;
+      x = centerPosX + cos(angle) * radius * amplitude;
+      y = centerPosY + sin(angle) * radius * amplitude;
+      ellipse(x, y, smallDiameter * frequency, smallDiameter * frequency);
     }
-  }
-  
-    private void function3(){
-    //TO-DO
-    fill(redcolor, greencolor, bluecolor);
-    ellipse(1000, 1000,100,100);
-  }
+  } //<>//
   
     private void function4(){
   //pushStyle();
@@ -350,54 +403,91 @@ private void function2(){
   }
   
   
-  public void update(float amplitudeMagnitude, float frequencyMagnitude, float visualizationIndex, float redcolor, float greencolor, float bluecolor) {
+  public void updateattributes(float amplitudeMagnitude, float frequencyMagnitude, float visualizationIndex) {
     this.amplitudeMagnitude = amplitudeMagnitude;
     this.frequencyMagnitude = frequencyMagnitude;
     this.visualizationIndex = (int) visualizationIndex;
-    this.redcolor = redcolor;
-    this.greencolor = greencolor;
-    this.bluecolor = bluecolor;
+    //this.redcolor = redcolor;
+    //this.greencolor = greencolor;
+    //this.bluecolor = bluecolor;
   }
 }
 
-class Particle {
-  PVector loc;
-  PVector vel;
+//class Particle {
+//  PVector loc;
+//  PVector vel;
 
-  float radius;
-  float h;
-  float s;
-  float b;
+//  float radius;
+//  float h;
+//  float s;
+//  float b;
 
-  Particle(int id) {
-    loc = new PVector(map(id, 0, fft.specSize(), 0, width), height/2);
-    vel = new PVector(random(-1, 1), random(-1, 1));
+//  Particle(int id) {
+//    loc = new PVector(map(id, 0, fft.specSize(), 0, width), height/2);
+//    vel = new PVector(random(-1, 1), random(-1, 1));
 
-    h = map(id, 0, fft.specSize(), 0, 360);
-    s = 100;
-    b = 100;
+//    h = map(id, 0, fft.specSize(), 0, 360);
+//    s = 100;
+//    b = 100;
+//  }
+
+//  void update(float _r, float _b) {
+//    loc.add(vel);
+
+//    if (loc.x < 0 || loc.x > width) {
+//      vel.x *= -1;
+//    }
+
+//    if (loc.y < 0 || loc.y > height) {
+//      vel.y *= -1;
+//    }
+
+//    radius = _r;
+//    radius = constrain(radius, 2, 100);
+
+//    b = map(_b, -1, 1, 0, 200);
+//  }
+
+//  void render() {
+//    stroke(h, s, b, 50);
+//    fill(h, s, b, 50);
+//    ellipse(loc.x, loc.y, radius*2, radius*2);
+//  }
+//}
+
+class PathFinder {
+
+  PVector location;
+  PVector velocity;
+  float diameter;
+  
+
+  PathFinder() {
+    location = new PVector(visualizerWidth/3, displayHeight/2);
+    velocity = new PVector(0, -2);
+    diameter = 40;
+  }
+  
+  PathFinder(PathFinder parent) {
+    location = parent.location.get();
+    velocity = parent.velocity.get();
+    float area = PI*sq(parent.diameter/2);
+    float newDiam = sqrt(area/2/PI)*2;
+    diameter = newDiam;
+    parent.diameter = newDiam;
   }
 
-  void update(float _r, float _b) {
-    loc.add(vel);
+  public void update() {
+    if (diameter>0.5) {
+      location.add(velocity);
+      PVector bump = new PVector(random(-1, 1), random(-1, 1));  // 随机生长方向
+      bump.mult(0.1);
+      velocity.add(bump);
+      velocity.normalize();
 
-    if (loc.x < 0 || loc.x > width) {
-      vel.x *= -1;
+      if (random(0, 1)<0.025) {
+        paths = (PathFinder[]) append(paths, new PathFinder(this));
+      }
     }
-
-    if (loc.y < 0 || loc.y > height) {
-      vel.y *= -1;
-    }
-
-    radius = _r;
-    radius = constrain(radius, 2, 100);
-
-    b = map(_b, -1, 1, 0, 200);
-  }
-
-  void render() {
-    stroke(h, s, b, 50);
-    fill(h, s, b, 50);
-    ellipse(loc.x, loc.y, radius*2, radius*2);
   }
 }

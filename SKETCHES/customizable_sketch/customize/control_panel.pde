@@ -13,7 +13,15 @@ public class ControlPanel {
   //color highlightColor = color(0,151,244);
   
   color dimColor = color(#000000);
+  //color dimColor = color(25,25,50);
+  
+  
   color highlightColor = color(0,150,250);
+  color highlightColor2 = color(25,25,50);
+  
+  color forBg = color(5,5,15);
+  color forG = color(25,25,50);
+  color forBut = color(90,90,137);
 
   public ControlPanel(Visualizer visualizer, int windowHeight, int windowWidth, int controlPanelWidth, ControlP5 cp5) {
     this.visualizer = visualizer;
@@ -153,7 +161,8 @@ public class ControlPanel {
 
     // Background
     //fill(49, 49, 49);
-    fill(60,60,60);
+    //fill(60,60,60);
+    fill(5,5,15);
     rect(controlPanelPosX, 0, controlPanelWidth, windowHeight);
 
     /* Text (margin: 60, 30) */
@@ -162,7 +171,8 @@ public class ControlPanel {
     textAlign(CENTER);
     textSize(24);
     fill(255, 255, 255);
-
+    
+//image(img, controlPanelPosX, 0,controlPanelWidth,100);
     text("K-WAi-audioVisualizer", controlPanelPosX + (controlPanelWidth/2), 60);
 
     // Subhead
@@ -210,11 +220,11 @@ public class ControlPanel {
     textSize(16);
     text("Instructions", elementsPosX, 610);
     textSize(12);
-    text("- INSERT INSTRUCTION 1 HERE", elementsPosX, 630);
-    text("- INSERT INSTRUCTION 2 HERE", elementsPosX, 650);
-    text("- INSERT INSTRUCTION 3 HERE", elementsPosX, 670);
-    text("- INSERT INSTRUCTION 4 HERE", elementsPosX, 690);
-    text("- INSERT INSTRUCTION 5 HERE", elementsPosX, 710);
+    text("- Choose the audio of your choice!", elementsPosX, 630);
+    text("- Choose one of the visualizer functions", elementsPosX, 650);
+    text("- Play around with the colors!", elementsPosX, 670);
+    text("- Play around with the amplitude and/or frequency of the audio ", elementsPosX, 690);
+    text("- Sit back and enjoy :) ", elementsPosX, 710);
 
   }
 
@@ -226,6 +236,6 @@ public class ControlPanel {
     float redcolor = cp5.get(Slider.class, "redcolor").getValue();
     float greencolor = cp5.get(Slider.class, "greencolor").getValue();
     float bluecolor = cp5.get(Slider.class, "bluecolor").getValue();
-    visualizer.update(amplitudeMagnitude, frequencyMagnitude, visualizationIndex, redcolor, greencolor, bluecolor);
+    visualizer.updateattributes(amplitudeMagnitude, frequencyMagnitude, visualizationIndex);
   }
 }
