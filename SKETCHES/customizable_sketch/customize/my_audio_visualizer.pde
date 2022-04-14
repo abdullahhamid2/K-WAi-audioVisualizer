@@ -47,7 +47,9 @@ int bands = 256;
 PathFinder[] paths;
 
 public void setup() {
-  fullScreen(P3D);
+  //fullScreen(P3D);
+  //size(1080,1080,P3D);
+  size(displayWidth, displayHeight, P3D);
   background(25);
   cp5 = new ControlP5(this);
   System.out.println("Reset!");
@@ -74,7 +76,6 @@ public void setup() {
   //for (int i = 0; i < fft.specSize(); i++) {
   //  particles[i] = new Particle(i);
   //}
-  size(displayWidth, displayHeight, P3D);
   img = loadImage("kwai_logo.jpg");
   visualizer = new Visualizer(windowHeight, windowWidth, visualizerWidth);
   controlPanel = new ControlPanel(visualizer, windowHeight, windowWidth, controlPanelWidth, cp5);

@@ -8,13 +8,7 @@ public class ControlPanel {
   int controlPanelPosX;
   int elementsPosX;
   int buttonWidth;
-
-  //color dimColor = color(35,35,35);
-  //color highlightColor = color(0,151,244);
-  
   color dimColor = color(#000000);
-  //color dimColor = color(25,25,50);
-  
   
   color highlightColor = color(0,150,250);
   color highlightColor2 = color(25,25,50);
@@ -30,7 +24,8 @@ public class ControlPanel {
     this.windowHeight = windowHeight;
     this.windowWidth = windowWidth;
     this.controlPanelWidth = controlPanelWidth;
-
+    
+    
     controlPanelPosX = this.windowWidth - this.controlPanelWidth;
     elementsPosX = controlPanelPosX + 30;
     buttonWidth = (controlPanelWidth - 75) / 2; // Half of element width - margin(15)
@@ -158,10 +153,6 @@ public class ControlPanel {
 
 
   public void draw() {
-
-    // Background
-    //fill(49, 49, 49);
-    //fill(60,60,60);
     fill(5,5,15);
     rect(controlPanelPosX, 0, controlPanelWidth, windowHeight);
 
@@ -172,7 +163,6 @@ public class ControlPanel {
     textSize(24);
     fill(255, 255, 255);
     
-//image(img, controlPanelPosX, 0,controlPanelWidth,100);
     text("K-WAi-audioVisualizer", controlPanelPosX + (controlPanelWidth/2), 60);
 
     // Subhead
@@ -200,6 +190,7 @@ public class ControlPanel {
     text("RED",elementsPosX+50,365);
     
     fill(0,255,0);
+    //ghtn
     text("GREEN", elementsPosX+250,365);
     
     fill(0,0,255);

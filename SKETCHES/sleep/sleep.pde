@@ -28,7 +28,8 @@ float var1;
 float var2;
 //Main Setup:
 void settings() {
-  size(1080, 1080);
+  size(1080,1080, P3D);
+  //fullScreen(P3D);
   smooth(8);
 }
 

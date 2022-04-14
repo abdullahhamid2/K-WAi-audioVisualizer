@@ -1,15 +1,14 @@
 //A.H
+//importing all the necessary libraries here
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
 import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
-import processing.video.*;
 Minim minim;
 AudioPlayer audio;
 AudioPlayer bg;
-Movie mov;
 boolean fade = true;
 boolean pause = false;
 float rAngle = random(0.1, 30);
@@ -19,17 +18,18 @@ float rWaveMap = random(2000, 10000);
 int bands = 256; // must be multiple of two
 float[] spectrum = new float[bands];
 float[] sum = new float[bands];
-float[] randomSpiral = {0.1, 0.8, 0.9, 2.1};
+float[] randomSpiral = {0.1, 0.8, 0.9, 2.1,2.4,3.0,3.6,26.1,33.1};
 int spiralChooser = 0;
 int musicRandomizer = int(random(1, 4));
 long current = System.currentTimeMillis();
-//long change = start + 10*1000;
 FFT fft;
 Particle[] particles;
+PFont myFont;
 boolean mo = true;
 void setup() {
   colorMode(HSB, 360, 60, 60, 60);
-  fullScreen(P3D);
+  size(1080,1080,P3D);
+  //fullScreen(P3D);
   smooth(8);
   frameRate(60);
   //AUDIO PROCESSING DONE HERE.
@@ -54,6 +54,10 @@ void setup() {
 }
 
 void draw() {
+  myFont = createFont("Arial", 32);
+  textFont(myFont,35);
+  textAlign(TOP);
+  text("Press any key to change the spiral!", 0,40);
   pushStyle();
   colorMode(RGB, 360);   //REMOVE THIS OR NAH?
   if (fade) {
@@ -70,7 +74,6 @@ void draw() {
     particles[i].render();
     particles[i].render();
   }
-  //for a wave function, -1 - 0 -  1
   float wave = sin(radians(frameCount));
   fft.forward(audio.mix);
   translate(width/2, height/2);
@@ -79,7 +82,7 @@ void draw() {
     //rotate(rAngle);
     //rotate(0.1); //0.8, 0.9, look good too.
     //make an array of good spirals
-    //rotate(2.1);
+    //rotate(33.1);
     rotate(randomSpiral[spiralChooser]);
     stroke(#F7FAF8); //WHITE
     line(850, i-w/2, -850, i++);
@@ -89,8 +92,6 @@ void draw() {
     line(-850, -i+w, 550, i++);
     stroke(#2BFC5A); //GREEN
     line(-850, i-w, 850, i++);
-    //particles[i].update(fft.getBand(i), audio.mix.get(i*2));
-    //particles[i].render();
   }
 }
 void keyPressed(){
