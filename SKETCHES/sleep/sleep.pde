@@ -1,5 +1,3 @@
-//Ameer: this is the relax preset with waves
-//float gl = round(sin(radians(i+150)) * (15*round(height / 100)) + (height * 3/4) - (round(sin(radians(150)))));
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -58,25 +56,6 @@ void drawStatic(){
  
     initialStatic = false;
   }
-  
-  for (int angle = 0; angle <= 240; angle += 1.5) {
-    float x = round(cos(radians(angle + 150)) * sphereRadius + center.x);
-    float y = round(sin(radians(angle + 150)) * sphereRadius + groundLineY - yOffset);
-    float xDestination = x;
-    float yDestination = y;
-  
-  for (int i = sphereRadius; i <= extendingSphereLinesRadius[angle]; i++) {
-      float x2 = cos(radians(angle + 150)) * i + center.x;
-      float y2 = sin(radians(angle + 150)) * i + groundLineY - yOffset;
- 
-      if (y2 <= getGroundY(x2)) { // Make sure it doesn't go into ground
-        xDestination = x2;
-        yDestination = y2;
-      }
-    }
-  stroke(255);
-  //if (y <= getGroundY(x)) line(x, y, xDestination, yDestination);
-  }   
 }
 
 
@@ -114,22 +93,8 @@ void drawAll(float[] sum) {
         fill(#DFF6FF, 200); //cool blue
         circle(x, y, 3* unit / 10.24);
       }
-      //noFill();
     }
     
-    //sound sphere in the middle:
-    //241 or player.bufferSize() - 1
-    //for (int i = 0; i < player.bufferSize() - 1; i++){
-    //  float angle = sin(i+var1)* 10; 
-    //  float angle2 = sin(i+var2)* 300; 
-    //  //float x = sin(radians(i))*(angle2+30); 
-    //  //float y = cos(radians(i))*(angle2+30);
-    //  float x3 = sin(radians(i))*(500/angle); 
-    //  float y3 = cos(radians(i))*(500/angle);
-    //  fill (#00ffff, 90); //blue
-    //  ellipse(x3+540, y3+650, player.right.get(i)*30, player.left.get(i)*30);
-      
-    //}
     
     direction = !direction;
     surrCount += 1;
