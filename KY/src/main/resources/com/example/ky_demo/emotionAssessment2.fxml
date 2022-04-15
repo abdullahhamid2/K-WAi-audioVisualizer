@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="901.0" style="-fx-background-color: rgb(5,5,15,1); -fx-background-image: KY_image2.png;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ky_demo.HelloController">
+   <children>
+      <AnchorPane layoutX="271.0" layoutY="107.0" prefHeight="338.0" prefWidth="377.0" style="-fx-background-color: rgb(25,25,50,1);">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="89.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@loadingBar.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="87.0" layoutX="145.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon.PNG" />
+               </image>
+            </ImageView>
+            <CheckBox layoutX="61.0" layoutY="196.0" mnemonicParsing="false" text="content" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font></CheckBox>
+            <CheckBox layoutX="61.0" layoutY="232.0" mnemonicParsing="false" text="bored" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="61.0" layoutY="267.0" mnemonicParsing="false" text="worried" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="160.0" layoutY="197.0" mnemonicParsing="false" text="calm" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="160.0" layoutY="233.0" mnemonicParsing="false" text="distracted" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="160.0" layoutY="268.0" mnemonicParsing="false" text="focused" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="255.0" layoutY="197.0" mnemonicParsing="false" text="relaxed" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="255.0" layoutY="233.0" mnemonicParsing="false" text="upset" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="255.0" layoutY="268.0" mnemonicParsing="false" text="inspired" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="49.0" layoutY="137.0" prefHeight="65.0" prefWidth="298.0" text="select as many words that describe your current feelings" textAlignment="CENTER" textFill="#fdfdfd">
+               <font>
+                  <Font name="Calibri" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="146.0" layoutY="86.0" prefHeight="65.0" prefWidth="87.0" text="emotion assessment" textAlignment="CENTER" textFill="#5a5a89">
+               <font>
+                  <Font name="Calibri" size="10.0" />
+               </font>
+            </Label>
+            <Button layoutX="146.0" layoutY="308.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="80.0" style="-fx-background-color: rgb(90,90,137,1);" text="submit" textFill="#838395">
+               <font>
+                  <Font name="Calibri" size="10.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
