@@ -17,10 +17,10 @@ float eRadius;
 //MAIN SETUP
 
 void setup () {
-  size(1080, 1080, P3D);
+  size(1080, 1080);
   smooth(8);
-  noCursor();
-  background (0);
+  surface.setResizable(true);
+    background (0);
   frameRate(30);  
   
   //experimenting with BeatDetect

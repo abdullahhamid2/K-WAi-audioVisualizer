@@ -24,14 +24,17 @@ float[] extendingSphereLinesRadius;
 PVector center;
 float var1;
 float var2;
+
+
 //Main Setup:
 void settings() {
-  size(1080,1080, P3D);
-  //fullScreen(P3D);
+  size(1080,1080);
   smooth(8);
 }
 
 void setup() {
+  surface.setResizable(true);
+  surface.setLocation(100,100);
   frameRate(fps);
   unit = height / 100; 
   groundLineY = height * 2/3; 
@@ -44,6 +47,9 @@ void setup() {
   fft.linAverages(256);
   //noCursor();
   background (0);
+  
+  
+
 }
 
 void drawStatic(){
