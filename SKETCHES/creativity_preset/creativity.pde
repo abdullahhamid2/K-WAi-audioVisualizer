@@ -22,6 +22,7 @@ float[] randomSpiral = {0.1, 0.8, 0.9, 2.1,2.4,3.0,3.6,26.1,33.1};
 int spiralChooser = 0;
 int musicRandomizer = int(random(1, 4));
 long current = System.currentTimeMillis();
+boolean fullscreen = false;
 FFT fft;
 Particle[] particles;
 PFont myFont;
@@ -29,7 +30,7 @@ boolean mo = true;
 void setup() {
   colorMode(HSB, 360, 60, 60, 60);
   size(1080,1080,P3D);
-  //fullScreen(P3D);
+  surface.setLocation(displayWidth/2-width/2, displayHeight/2-height/2);
   smooth(8);
   frameRate(60);
   //AUDIO PROCESSING DONE HERE.
@@ -54,7 +55,10 @@ void setup() {
 }
 
 void draw() {
-  myFont = createFont("Arial", 32);
+  fill(0);
+  rect(0,0,600, height/20);
+  fill(#FFFFFF);
+  myFont = createFont("Arial Bold", 60);
   textFont(myFont,35);
   textAlign(TOP);
   text("Press any key to change the spiral!", 0,40);
@@ -79,10 +83,6 @@ void draw() {
   translate(width/2, height/2);
   float w =  wave*map(rWaveMap, 0, height, 500, 0);
   for (int i = 0; i < fft.specSize() - 1; i++) {
-    //rotate(rAngle);
-    //rotate(0.1); //0.8, 0.9, look good too.
-    //make an array of good spirals
-    //rotate(33.1);
     rotate(randomSpiral[spiralChooser]);
     stroke(#F7FAF8); //WHITE
     line(850, i-w/2, -850, i++);
@@ -94,9 +94,24 @@ void draw() {
     line(-850, i-w, 850, i++);
   }
 }
-void keyPressed(){
-    spiralChooser = int(random(0, randomSpiral.length));
+
+public void keyPressed()
+{
+  spiralChooser = int(random(0, randomSpiral.length));
+  if(key == 'f'){
+    if (fullscreen) {
+    surface.setSize(1080,1080); 
+    fullscreen=false;
+        
+  } else {
+    surface.setSize(displayWidth,displayHeight);
+    fullscreen=true;
+       
+  }
+  
+  }
 }
+
 class Particle {
   PVector loc;
   PVector vel;
